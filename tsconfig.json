@@ -1,0 +1,32 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES6",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "preserveConstEnums": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": true,
+        "rootDir": "./src",
+        "outDir": "./build"
+    },
+    "atom": {
+        "rewriteTsconfig": true
+    },
+    "exclude": [
+        "node_modules",
+        "build"
+    ],
+    "include": [
+        "./src/typdts/*/*.d.ts",
+        "./src/apis/*.ts"
+    ],
+    "files": [
+        "./src/index.ts"
+    ],
+    "filesGlob": [
+        "./src/**/*.ts"
+    ]
+}
