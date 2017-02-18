@@ -86,9 +86,35 @@
 }
 ```
 
+### 项目配置文件
+``` JavaScript
+// config.json
+{
+    "port": "8083",          // 端口
+    "log": {
+        "log_name": "log",   // 日志名称
+        "log_path": "logs/"  // 日志路径
+    },
+    "mongo": {
+        "development": {
+            "host": "mongodb://localhost:27017/ts-test"
+        },
+        "production": {
+            "host": ""
+        }
+    },
+    "session": {
+        "secrets": "koa-ts"
+    },
+    "jwt": {
+        "secret": "koa-ts-jwt"
+    }
+}
+```
+
 ### 启动
 首先要确认mongodb是开启状态
 ``` bash
-    npm run build  # 启动tsc编译监控
+npm run build  # 启动tsc编译监控
 ```
 点击vscode默认debug键, enjoy!
