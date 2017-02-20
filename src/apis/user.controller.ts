@@ -1,7 +1,7 @@
 'use strict'
 import * as Mongoose from "mongoose";
 import { IRouterContext }from 'koa-router';
-import {router, required, convert, log} from '../middleware/router';
+import {router, required, prefix, convert, log} from '../middleware/router';
 const UserModel = Mongoose.model('User');
 
 //中间件测试
@@ -10,15 +10,13 @@ async function someFun (ctx: IRouterContext, next: any) {
     await next();
 }
 
+@prefix('/user')
 class UserController {
-
-    //router prefix
-    //static prefix:string = '/user';
 
     //http://localhost:8083/user/findOne/zhangsan
     @router({
         method: 'get',
-        path: '/user/findOne/:username'
+        path: '/findOne/:username'
     })
     @required({params: 'username'})
     @convert(someFun)
@@ -31,7 +29,7 @@ class UserController {
     //http://localhost:8083/user/list
     @router({
         method: 'get',
-        path: '/user/list'
+        path: '/list'
     })
     @convert(someFun)
     @log
@@ -43,7 +41,7 @@ class UserController {
     //http://localhost:8083/user/register?username=zhangsan&&password=15&&email=soraping@163.com
     @router({
         method: 'post',
-        path: '/user/register'
+        path: '/register'
     })
     @log
     async saveUser (ctx: IRouterContext): Promise<void> {
@@ -57,7 +55,7 @@ class UserController {
 
     @router({
         method: 'post',
-        path: '/user/login'
+        path: '/login'
     })
     @log
     async loginUser (ctx: IRouterContext): Promise<void> {

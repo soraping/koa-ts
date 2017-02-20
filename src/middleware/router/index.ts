@@ -2,7 +2,7 @@
  * 路由中间件
  */
 'use strict'
-import Route from './Route';
+import {symbolRoutePrefix, Route} from './Route';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 
@@ -27,7 +27,7 @@ export function required (args: any) {
  */
 export function prefix (prefix: string){
     return (target: any) => {
-        target._prefix = prefix;
+        target.prototype[symbolRoutePrefix] = prefix;
     }
 }
 

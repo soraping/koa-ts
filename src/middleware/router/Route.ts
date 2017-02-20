@@ -5,6 +5,9 @@ import * as glob from 'glob';
 import * as path from "path";
 const router = new Router();
 
+//定义不变字段，在使用时读取
+export const symbolRoutePrefix:symbol = Symbol("routePrefix");
+
 
 /**
  * 路由执行类
@@ -13,7 +16,7 @@ const router = new Router();
  * 
  * @class Route
  */
-class Route {
+export class Route {
     //静态 存储被修饰后的路由的地方
     static __DecoratedRouters: Map<{target: any, method: string, path: string}, Function | Function[]> = new Map();
     private router: any;
@@ -47,12 +50,16 @@ class Route {
         //配置路由
         for(let [config, controller] of Route.__DecoratedRouters) {
             let controllers = Array.isArray(controller) ? controller : [controller];
-            controllers.forEach((controller) => this.router[config.method](config.path, controller));
+            let prefixPath = config.target[symbolRoutePrefix];
+            if(prefixPath && (!prefixPath.startsWith('/'))){
+                prefixPath = '/' + prefixPath;
+            }
+            //拼接api路由
+            let routerPath = prefixPath + config.path;
+            controllers.forEach((controller) => this.router[config.method](routerPath, controller));
         }
         this.app.use(this.router.routes());
         this.app.use(this.router.allowedMethods());
     }
 
 }
-
-export default Route

@@ -1,10 +1,9 @@
 'use strict';
 import { IRouterContext }from 'koa-router';
-import {router, required, convert, log} from '../middleware/router';
+import {router, required, prefix, convert, log} from '../middleware/router';
 
+@prefix('hello')
 class TestController {
-
-    static prefix:string = '/test';
 
     @router({
         'method': 'get',

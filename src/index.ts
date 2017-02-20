@@ -6,7 +6,7 @@ import * as Json from 'koa-json';
 import config from './config';
 import logger from './middleware/logger';
 import koaError from './middleware/error';
-import Route from './middleware/router/Route';
+import {Route} from './middleware/router/Route';
 import * as Database from './middleware/db';
 import * as cors from 'koa-cors';
 
