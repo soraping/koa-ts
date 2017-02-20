@@ -112,6 +112,28 @@
 }
 ```
 
+### 开发
+参照了网上的一些案例，进行了整理，利用es7的Decorator把koa-router做了一些封装
+``` JavaScript
+import {router, required, convert, log} from '../middleware/router';
+// api path
+@router({
+    method: 'get',
+    path: '/user/findOne/:username'
+})
+// 必传参数 {params: ...,query:...}
+@required({params: 'username'})
+// 中间件，api执行前会调用someFun方法
+@convert(someFun)
+// 日志
+@log
+async getUserOne (ctx: IRouterContext): Promise<void> {
+    let user = await UserModel.findOne({username: ctx.params.username});
+    ctx.body = user;
+}
+```
+设计api时可以按照上述写法，这样写就更加的优雅
+
 ### 启动
 首先要确认mongodb是开启状态
 ``` bash
