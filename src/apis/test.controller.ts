@@ -1,5 +1,5 @@
 'use strict';
-import { IRouterContext }from 'koa-router';
+import * as Koa from 'koa';
 import {router, required, prefix, convert, log} from '../middleware/router';
 
 @prefix('hello')
@@ -13,7 +13,7 @@ class TestController {
         'query': ['username','age']
     })
     @log
-    async testFun (ctx: IRouterContext): Promise<void> {
+    async testFun (ctx: Koa.Context): Promise<void> {
         ctx.body = ctx.query;
     }
 

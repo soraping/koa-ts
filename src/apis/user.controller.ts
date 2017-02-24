@@ -1,11 +1,11 @@
 'use strict'
 import * as Mongoose from "mongoose";
-import { IRouterContext }from 'koa-router';
+import * as Koa from 'koa';
 import {router, required, prefix, convert, log} from '../middleware/router';
 const UserModel = Mongoose.model('User');
 
 //中间件测试
-async function someFun (ctx: IRouterContext, next: any) {
+async function someFun (ctx: Koa.Context, next: any) {
     console.log('convert function');
     await next();
 }
@@ -21,7 +21,7 @@ class UserController {
     @required({params: 'username'})
     @convert(someFun)
     @log
-    async getUserOne (ctx: IRouterContext): Promise<void> {
+    async getUserOne (ctx: Koa.Context): Promise<void> {
         let user = await UserModel.findOne({username: ctx.params.username});
         ctx.body = user;
     }
@@ -33,7 +33,7 @@ class UserController {
     })
     @convert(someFun)
     @log
-    async getUserList (ctx: IRouterContext): Promise<void> {
+    async getUserList (ctx: Koa.Context): Promise<void> {
         let userList = await UserModel.find();
         ctx.body = userList;
     }
@@ -44,7 +44,7 @@ class UserController {
         path: '/register'
     })
     @log
-    async saveUser (ctx: IRouterContext): Promise<void> {
+    async saveUser (ctx: Koa.Context): Promise<void> {
         let _user = ctx.request.body;
         //实例化一个新的用户模型
         let newUser = new UserModel(_user);
@@ -58,7 +58,7 @@ class UserController {
         path: '/login'
     })
     @log
-    async loginUser (ctx: IRouterContext): Promise<void> {
+    async loginUser (ctx: Koa.Context): Promise<void> {
         let _user = ctx.request.body;
     }
 

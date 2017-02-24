@@ -4,7 +4,6 @@
 'use strict'
 import {symbolRoutePrefix, Route} from './Route';
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
 
 //记录请求数
 let requestID = 0;
@@ -79,7 +78,7 @@ export function log (target: any, name: string, value: PropertyDescriptor) {
     target[name] = sureIsArray(target[name]);
     target[name].splice(target[name].length - 1, 0, Logger);
     
-    async function Logger(ctx: Router.IRouterContext, next: any){
+    async function Logger(ctx: Koa.Context, next: any){
         //请求数加1
         let currentRequestID = requestID++;
     
@@ -137,7 +136,7 @@ function requireDescriptor (target: any, name: string, descriptor: PropertyDescr
     target[name].splice(target[name].length - 1, 0, middleware);
     return descriptor;
 
-    async function middleware (ctx: Router.IRouterContext, next: any) {
+    async function middleware (ctx: Koa.Context, next: any) {
         if (rules.query) {
             rules.query = sureIsArray(rules.query);
             for (let name of rules.query) {
