@@ -12,7 +12,7 @@
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
-            "outDir": "${workspaceRoot}/build",
+            "outFiles": ["${workspaceRoot}/build/*.js"],
             "runtimeExecutable": "nodemon",
             "runtimeArgs": [
                 "--nolazy"
@@ -20,17 +20,8 @@
             "env": {
                 "NODE_ENV": "development"
             },
-            "externalConsole": false,
             "sourceMaps": true,
             "restart": true
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "附加到进程",
-            "port": 5858,
-            "outFiles": [],
-            "sourceMaps": true
         }
     ]
 }
