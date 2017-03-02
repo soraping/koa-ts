@@ -20,7 +20,7 @@ export interface Database {
 //连接mongo
 export function init(config: DbConfig): Database {
     //mongo设置promise
-    (<any>Mongoose).Promise = Promise;
+    (<any>Mongoose).Promise = global.Promise
     Mongoose.connect(config.host);
 
     let mongoDb = Mongoose.connection;

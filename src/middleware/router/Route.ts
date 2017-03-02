@@ -44,7 +44,7 @@ export class Route {
      * 
      * @memberOf Route
      */
-    registerRouters(controllerDir: String){
+    registerRouters(controllerDir: string){
         //载入api接口,使用sync同步载入
         glob.sync(path.join(controllerDir, './*.js')).forEach((item)=>require(item));
         //配置路由

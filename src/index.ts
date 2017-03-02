@@ -9,6 +9,7 @@ import koaError from './middleware/error';
 import {Route} from './middleware/router/Route';
 import * as Database from './middleware/db';
 import * as cors from 'koa-cors';
+import * as jwt from 'koa-jwt';
 
 const app = new Koa();
 const router = new Route(app);
@@ -25,6 +26,9 @@ app.use(convert(cors({
     origin: true,
     credentials: true
 })));
+
+//jwt 和排除路由
+app.use(jwt({secret: config.get('session').secrets}).unless({ path: [/^\/user\/register/] }));
 
 //注册路由
 router.registerRouters(`${__dirname}/apis`);

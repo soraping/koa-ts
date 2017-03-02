@@ -2,6 +2,7 @@
 import * as Mongoose from "mongoose";
 import * as Koa from 'koa';
 import {router, required, prefix, convert, log} from '../middleware/router';
+import {signToken} from '../middleware/auth'
 const UserModel = Mongoose.model('User');
 
 //中间件测试
@@ -38,7 +39,7 @@ class UserController {
         ctx.body = userList;
     }
     
-    //http://localhost:8083/user/register?username=zhangsan&&password=15&&email=soraping@163.com
+    //http://localhost:8083/user/register
     @router({
         method: 'post',
         path: '/register'
@@ -49,8 +50,11 @@ class UserController {
         //实例化一个新的用户模型
         let newUser = new UserModel(_user);
         //存储
-        const user = await newUser.save();
-        ctx.body = user;
+        let user:any = await newUser.save();
+        ctx.body =  {
+            token: signToken(user.id),
+            username: user.username
+        };
     }
 
     @router({
