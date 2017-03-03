@@ -37,17 +37,14 @@ export function prefix (prefix: string){
  *   path: '/login/:id'
  * })
  */
-export function router (config: {path: string, method: string}) {
+export function router (config: {path: string, method: string, unless?: boolean}) {
     return (target: any, name: string, value: PropertyDescriptor) => {
-        //获取类的静态属性,即定义的router prefix
-        const prefix = target.constructor.prefix || '';
-        //调用静态属性,拼接路由
-        const path = prefix + config.path;
         //map类型设置值
         Route.__DecoratedRouters.set({
             target: target,
-            path: path,
-            method: config.method
+            path: config.path,
+            method: config.method,
+            unless: config.unless
         },target[name]);
     }
 }

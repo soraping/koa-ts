@@ -20,7 +20,6 @@ class UserController {
         path: '/findOne/:username'
     })
     @required({params: 'username'})
-    @convert(someFun)
     @log
     async getUserOne (ctx: Koa.Context): Promise<void> {
         let user = await UserModel.findOne({username: ctx.params.username});
@@ -42,7 +41,8 @@ class UserController {
     //http://localhost:8083/user/register
     @router({
         method: 'post',
-        path: '/register'
+        path: '/register',
+        unless: true
     })
     @log
     async saveUser (ctx: Koa.Context): Promise<void> {
@@ -59,7 +59,8 @@ class UserController {
 
     @router({
         method: 'post',
-        path: '/login'
+        path: '/login',
+        unless: true
     })
     @log
     async loginUser (ctx: Koa.Context): Promise<void> {
