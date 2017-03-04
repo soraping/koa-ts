@@ -27,7 +27,7 @@ app.use(convert(cors({
 })));
 
 //注册路由
-router.registerRouters(`${__dirname}/apis`, config.get('session').secrets);
+router.registerRouters(`${__dirname}/apis`, config.get('jwt').secret);
 
 //错误
 app.on('error', (err:any, ctx:Koa.Context) => {

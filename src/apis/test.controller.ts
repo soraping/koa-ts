@@ -7,7 +7,8 @@ class TestController {
 
     @router({
         'method': 'get',
-        'path': '/haha'
+        'path': '/haha',
+        'unless': true
     })
     @required({
         'query': ['username','age']
