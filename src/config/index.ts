@@ -12,5 +12,6 @@ if(!obj.config){
 }
 let config = obj.config;
 config.set('root', path.join(__dirname, '../'));
+config.set('env', process.env.NODE_ENV);
 
 export default config;

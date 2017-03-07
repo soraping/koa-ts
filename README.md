@@ -27,8 +27,8 @@
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
-            "outDir": "${workspaceRoot}/build",
-            "runtimeExecutable": "nodemon",  
+            "outFiles": ["${workspaceRoot}/build/**/*.js"],
+            "runtimeExecutable": "nodemon",
             "runtimeArgs": [
                 "--nolazy"
             ],
@@ -123,7 +123,8 @@ class UserController{
     // 访问路径就是/user/findOne/zhangsan
     @router({
         method: 'get',
-        path: '/findOne/:username'
+        path: '/findOne/:username',
+        unless: true   //如果不做jwt校验，则把这个字段置为true，默认校验
     })
     // 必传参数 {params: ...,query:...}
     @required({params: 'username'})

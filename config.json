@@ -12,10 +12,21 @@
             "host": ""
         }
     },
+    "redis": {
+        "development": {
+            "host": "172.19.65.240",
+            "db": 1
+        },
+        "production": {
+            "host": "",
+            "db": 1
+        }
+    },
     "session": {
         "secrets": "koa-ts"
     },
     "jwt": {
-        "secret": "koa-ts-jwt"
+        "secret": "koa-ts-jwt",
+        "time": "1d"
     }
 }

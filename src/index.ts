@@ -14,7 +14,7 @@ const app = new Koa();
 const router = new Route(app);
 
 //连接mongo
-Database.init(config.get('mongo')['development']);
+Database.init(config.get('mongo')[config.get('env')]);
 
 app.use(convert(Json()));
 app.use(BodyParser());
