@@ -4,6 +4,7 @@ import * as Router from 'koa-router';
 import * as glob from 'glob';
 import * as path from "path";
 import * as jwt from 'koa-jwt';
+import {verifyToken} from '../auth';
 const router = new Router();
 
 //定义不变字段，在使用时读取
@@ -60,12 +61,12 @@ export class Route {
             let routerPath = prefixPath + config.path;
             //将忽略路由集合
             if(config.unless){
-                unlessPath.push(routerPath)
+                unlessPath.push(routerPath);
             }
             controllers.forEach((controller) => this.router[config.method](routerPath, controller));
         }
         //一定要在router载入之前
-        this.app.use(jwt({secret: secrets}).unless({ path: unlessPath}));
+        this.app.use(jwt({secret: secrets, isRevoked: verifyToken, debug: true}).unless({ path: unlessPath}));
         this.app.use(this.router.routes());
         this.app.use(this.router.allowedMethods());
     }

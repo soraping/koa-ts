@@ -14,7 +14,7 @@
     },
     "redis": {
         "development": {
-            "host": "172.19.65.240",
+            "host": "localhost",
             "db": 1
         },
         "production": {
@@ -27,6 +27,7 @@
     },
     "jwt": {
         "secret": "koa-ts-jwt",
-        "time": "1d"
+        "time": "1d",
+        "utoken": "utoken"
     }
 }
