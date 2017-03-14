@@ -34,7 +34,7 @@ export async function verifyToken(ctx: Koa.Context, user: any, token: string){
 
     let userId = user.userId;
     try{
-        let vtoken = await redisStorage.get(userId);
+        let vtoken: string = await redisStorage.get(userId);
         //需要对token的时效性和token的正确性做校验
         if(token != vtoken){
             throw("token")

@@ -4,4 +4,14 @@
 import * as redis from 'koa-redis';
 import config from '../../config';
 
-export default redis(config.get('redis')[config.get('env')]).client;
+const redisClient = redis(config.get('redis')[config.get('env')]).client;
+
+redisClient.on('connect', ()=>{
+    console.log('redis connect');
+})
+
+redisClient.on('error', ()=>{
+    console.error('redis server require start');
+})
+
+export default redisClient;
