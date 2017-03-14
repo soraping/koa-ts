@@ -45,7 +45,7 @@ export class Route {
      * 
      * @memberOf Route
      */
-    registerRouters(controllerDir: string, secrets: string){
+    registerRouters(controllerDir: string, jwtOpts: jwt.Options){
         //载入api接口,使用sync同步载入
         glob.sync(path.join(controllerDir, './*.js')).forEach((item)=>require(item));
         //不做校验的路由集合
@@ -66,7 +66,7 @@ export class Route {
             controllers.forEach((controller) => this.router[config.method](routerPath, controller));
         }
         //一定要在router载入之前
-        this.app.use(jwt({secret: secrets, isRevoked: verifyToken, debug: true}).unless({ path: unlessPath}));
+        this.app.use(jwt({secret: jwtOpts.secret,key: jwtOpts.key, isRevoked: verifyToken, debug: true}).unless({ path: unlessPath}));
         this.app.use(this.router.routes());
         this.app.use(this.router.allowedMethods());
     }

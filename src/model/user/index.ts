@@ -22,14 +22,17 @@ export const UserSchema = new Mongoose.Schema({
         type: String,
         required: true 
     },
-    created: {
+    createTime: {
         type: Date,
         default: Date.now
     },
-    updated: {
+    updateTime: {
         type: Date,
         default: Date.now
     }
+},{
+    versionKey: false,
+    timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' }
 });
 
 export const UserModel = Mongoose.model<IUser>('User', UserSchema);

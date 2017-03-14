@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>test</title>
+    </head>
+    <body>
+        <div>
+            <h3>user test</h3>
+            <div class="">
+                username: <input type="text" name="username" value="">
+                password: <input type="password" name="password" value="">
+                email: <input type="text" name="email" value="">
+                <button id='btn' type="button" name="button">sumbit</button>
+            </div>
+
+            <div class="">
+                username: <input type="text" name="username2" value="">
+                password: <input type="password" name="password2" value="">
+                <button id="login" type="button" name="button">login</button>
+            </div>
+
+            <div>
+                <button id='loginout' type="button">loginout</button>
+            </div>
+        </div>
+        
+
+        <div class="">
+            <h3>mongo test</h3>
+            <button id='getList' type="button" name="button">获取用户列表</button>
+        </div>
+
+        <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            var HOST = "http://localhost:8083";
+            $('#btn').on('click', function(){
+                var data = {
+                    username: $('input[name="username"]').val(),
+                    password: $('input[name="password"]').val(),
+                    email: $('input[name="email"]').val()
+                }
+                $.post(HOST + '/user/register', data, function(res){
+                    console.log(res);
+                    localStorage.setItem('token', res.token);
+                })
+            });
+
+            $('#login').on('click',function(){
+                var data = {
+                    username: $('input[name="username2"]').val(),
+                    password: $('input[name="password2"]').val()
+                }
+                $.post(HOST + '/user/login', data, function(res){
+                    console.log(res);
+                })
+            });
+
+            $('#loginout').on('click', function(){
+                var token = localStorage.getItem('token') || '';
+                $.ajax({
+                    url:HOST + '/user/loginout',
+                    type:'post',
+                    dataType: 'json',
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        Authorization: 'Bearer ' + token
+                    },
+                    success: function(res){
+                        console.log(res);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            });
+
+            $('#getList').on('click',function(){
+                var token = localStorage.getItem('token') || '';
+                $.ajax({
+                    url:HOST + '/user/list',
+                    type:'get',
+                    dataType: 'json',
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        Authorization: 'Bearer ' + token
+                    },
+                    success: function(res){
+                        console.log(res);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

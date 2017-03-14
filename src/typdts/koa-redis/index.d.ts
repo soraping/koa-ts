@@ -11,6 +11,7 @@ declare module 'koa-redis' {
         // key-value
         get(key: string): Promise<any>;
         set(key: string, values: any): Promise<any>;
+        del(key: string): Promise<any>;
         /**
          * hash
          */
@@ -18,6 +19,8 @@ declare module 'koa-redis' {
         hmset(hash: string, HashMap: {[propName: string]: any}): Promise<any>;
         // client.hmset(hash, key,value,key,value...)
         hmset(hash: string, ...HashString: any[]): Promise<any>;
+        // client.hmset(hash, [string,...])
+        hmset(hash: string, HashMap: string[]): Promise<any>;
         hmget(hash: string): Promise<any>;
         hgetall(hash: string): Promise<any>;
         /**

@@ -27,7 +27,8 @@
     },
     "jwt": {
         "secret": "koa-ts-jwt",
-        "time": "1d",
-        "utoken": "utoken"
+        "key": "mytoken",
+        "time": "1d"
+        
     }
 }

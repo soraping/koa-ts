@@ -2,7 +2,7 @@
 import * as Mongoose from "mongoose";
 import * as Koa from 'koa';
 import {router, required, prefix, convert, log} from '../middleware/router';
-import {signToken} from '../middleware/auth'
+import {signToken, clearToken} from '../middleware/auth'
 const UserModel = Mongoose.model('User');
 
 //中间件测试
@@ -57,6 +57,10 @@ class UserController {
         };
     }
 
+    /**
+     * 登录
+     * @param ctx 
+     */
     @router({
         method: 'post',
         path: '/login',
@@ -65,6 +69,20 @@ class UserController {
     @log
     async loginUser (ctx: Koa.Context): Promise<void> {
         let _user = ctx.request.body;
+    }
+
+    /**
+     * 登出
+     * @param ctx 
+     */
+    @router({
+        method: 'post',
+        path: '/loginout'
+    })
+    @convert(clearToken)
+    @log
+    async loginout (ctx: Koa.Context): Promise<void> {
+        ctx.body = "登出成功";
     }
 
 }
