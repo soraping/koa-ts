@@ -3,7 +3,7 @@
  */
 'use strict';
 import * as Koa from 'koa';
-async function errorMiddleware(ctx: Koa.Context, next: any){
+export default async (ctx: Koa.Context, next: any) => {
     try{
         await next();
     }catch(err){
@@ -11,5 +11,3 @@ async function errorMiddleware(ctx: Koa.Context, next: any){
         ctx.app.emit('error', err, ctx);
     }
 }
-
-export default errorMiddleware;

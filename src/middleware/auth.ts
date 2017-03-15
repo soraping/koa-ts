@@ -34,7 +34,7 @@ export async function verifyToken(ctx: Koa.Context, user: any, token: string){
 
     let userId = user.userId;
     try{
-        let vtoken: string = await redisStorage.get(userId);
+        let vtoken = await redisStorage.get(userId);
         //需要对token的时效性和token的正确性做校验
         if(token != vtoken){
             throw("Invalid token token")
@@ -57,4 +57,13 @@ export async function clearToken(ctx: Koa.Context, next: any){
     //清除token
     redisStorage.del(_user['userId']);
     await next();
+}
+
+/**
+ * 刷新token在redis中存储时间
+ * @param token
+ */
+export async function expireToken(token: string, userId: string){
+    let jwtConfig = config.get('jwt');
+    await redisStorage.set(userId, token);
 }

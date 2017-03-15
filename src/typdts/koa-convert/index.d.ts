@@ -6,7 +6,7 @@ declare module "koa-convert" {
     interface  Middleware {
         (context: any, next?: () => Promise<void>): Promise<any>;
     }
-    function convert(middleware?: Middleware):{ (ctx: Koa.Context, next?: () => any): any };
+    function convert(middleware?: Middleware):Koa.Middleware;
     namespace convert {}
     export = convert;
 }

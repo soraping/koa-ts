@@ -69,6 +69,7 @@ class UserController {
     @log
     async loginUser (ctx: Koa.Context): Promise<void> {
         let _user = ctx.request.body;
+        ctx.body = _user;
     }
 
     /**

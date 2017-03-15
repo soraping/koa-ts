@@ -12,6 +12,7 @@ declare module 'koa-redis' {
         get(key: string): Promise<any>;
         set(key: string, values: any): Promise<any>;
         del(key: string): Promise<any>;
+        expire(key: string, time: string): Promise<any>;
         /**
          * hash
          */
