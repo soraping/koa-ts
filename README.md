@@ -1,6 +1,6 @@
 ## koa+typescript
 
-新项目，更加轻量，更加简单，[请移步 lenneth](https://github.com/soraping/lenneth)
+> **新项目，更加轻量，更加简单，[请移步 lenneth](https://github.com/soraping/lenneth)**
 
 > - 框架: koa+tyescript
 > - db: mongodb
