@@ -1,12 +1,12 @@
 ## koa+typescript
 
-> * 框架: koa+tyescript
-> * db: mongodb
-> * 编辑器: vscode
-> * 测试: mocha
-> * 项目地址: https://github.com/soraping/koa-ts.git
+新项目，更加轻量，更加简单，[请移步 lenneth](https://github.com/soraping/lenneth)
 
-[移步 lenneth](https://github.com/soraping/lenneth)
+> - 框架: koa+tyescript
+> - db: mongodb
+> - 编辑器: vscode
+> - 测试: mocha
+> - 项目地址: https://github.com/soraping/koa-ts.git
 
 ### 项目下载安装模块
 
